@@ -3,6 +3,8 @@ package com.mall.service;
 import com.mall.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RoleService extends IService<Role> {
 
+    List<com.mall.domain.Role> selectRolesByUserId(Long userId);
 }

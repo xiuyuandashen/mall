@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mall.mapper.RoleMapper">
-
+    <resultMap id="roleMap" type="com.mall.domain.Role" >
+        <id property="roleId" column="role_id"></id>
+        <result property="roleName" column="role_name" ></result>
+        <result property="roleKey" column="role_key" ></result>
+        <result property="roleSort" column="role_sort" ></result>
+        <result property="status" column="status" ></result>
+        <result property="delFlag" column="del_flag" ></result>
+        <result property="createBy" column="create_by" ></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateBy" column="update_by"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="remark" column="remark"></result>
+    </resultMap>
+    
+    <sql id="selectRoleVo">
+        select distinct r.*
+        from mall_role r
+        left join mall_user_role ur on ur.role_id = r.role_id
+        left join mall_user u on u.user_id = ur.user_id
+    </sql>
+    
+    <select id="selectRolesByUserId" resultType="com.mall.domain.Role" parameterType="long">
+        <include refid="selectRoleVo"></include>
+        where u.user_id = #{userId}  order by r.role_sort asc
+    </select>
 </mapper>

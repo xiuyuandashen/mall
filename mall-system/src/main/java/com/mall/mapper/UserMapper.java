@@ -16,4 +16,12 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper extends BaseMapper<User> {
 
     User selectUserByUserName(String username);
+
+    User checkPhoneUnique(String phonenumber);
+
+    User checkEmailUnique(String email);
+
+    int updateUser(User user);
+
+    User getUserByUserId(Long userId);
 }
