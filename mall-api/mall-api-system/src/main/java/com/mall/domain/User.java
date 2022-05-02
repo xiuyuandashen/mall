@@ -1,12 +1,15 @@
 package com.mall.domain;
 
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;

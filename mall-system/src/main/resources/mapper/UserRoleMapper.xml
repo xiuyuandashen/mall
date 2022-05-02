@@ -3,18 +3,18 @@
 <mapper namespace="com.mall.mapper.UserRoleMapper">
 
     <delete id="deleteUserRoleByUserId" parameterType="Long">
-		delete from user_role where user_id=#{userId}
+		delete from mall_user_role where user_id=#{userId}
 	</delete>
 
     <delete id="deleteUserRole" parameterType="Long">
-        delete from user_role where user_id in
+        delete from mall_user_role where user_id in
         <foreach collection="array" item="userId" open="(" separator="," close=")">
             #{userId}
         </foreach>
     </delete>
 
     <insert id="batchUserRole" >
-        insert into sys_user_role(user_id, role_id) values
+        insert into mall_user_role(user_id, role_id) values
         <foreach item="item" index="index" collection="list" separator=",">
             (#{item.userId},#{item.roleId})
         </foreach>
