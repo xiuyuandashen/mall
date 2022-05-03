@@ -24,24 +24,23 @@ public class UserAuthController {
     private String tokenHead;
 
     @GetMapping("/test")
-    public ResultVo test(){
+    public ResultVo test() {
         return remoteUserService.test();
     }
 
     @PostMapping("/login")
-    public ResultVo login(@RequestParam("username") String username,@RequestParam("password") String password){
+    public ResultVo login(@RequestParam("username") String username, @RequestParam("password") String password) {
         ResultVo resultVo = remoteUserService.userInfo(username);
-        System.out.println(resultVo);
         Object o = resultVo.getData().get("user");
         String json = JSON.toJSONString(o);
         loginUser userVo = JSON.parseObject(json, loginUser.class);
         User user = userVo.getSysUser();
-        if(user==null) return ResultVo.error().message("用户名错误");
-        if(!password.equals(user.getPassword())) return ResultVo.error().message("密码错误");
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("username",user.getUserName());
+        if (user == null) return ResultVo.error().message("用户名错误");
+        if (!password.equals(user.getPassword())) return ResultVo.error().message("密码错误");
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", user.getUserName());
         String token = jwtTokenUtil.generateToken(map);
-        return ResultVo.ok().data("token",tokenHead+" "+token);
+        return ResultVo.ok().data("token", tokenHead + " " + token);
     }
 
 
