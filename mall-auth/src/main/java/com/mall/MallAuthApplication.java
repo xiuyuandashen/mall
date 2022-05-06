@@ -12,3 +12,5 @@ public class MallAuthApplication {
         SpringApplication.run(MallAuthApplication.class,args);
     }
 }
+
+
