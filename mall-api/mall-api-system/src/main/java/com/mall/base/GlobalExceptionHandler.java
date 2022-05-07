@@ -45,6 +45,7 @@ public class GlobalExceptionHandler {
         log.info(e.getMessage());
         return ResultVo.error().message(e.getMessage());
     }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResultVo mismatchErrorHandler(MethodArgumentTypeMismatchException e) {
         log.error("参数转换失败，方法：" + Objects.requireNonNull(e.getParameter().getMethod()).getName() + ",参数：" +

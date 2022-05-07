@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean(name = "encoder")
-    public BCryptPasswordEncoder getEncoder(){
+    public BCryptPasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -71,6 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                         "/mall/auth/login",
                         "/mall/system/user/info/**"
+//                        "/mall/system/user/register"
 //                        "/mall/user/**"
                 )// 对登录注册要允许匿名访问
                 .permitAll()
@@ -78,8 +79,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 //                .antMatchers("/**")//测试时全部运行访问
 //                .permitAll()
-                .anyRequest()// 除上面外的所有请求全部需要鉴权认证
-                .authenticated();
+                .anyRequest()
+                .permitAll();
+        // 不需要 authenticated 也行 因为 @PreAuthorize 可以拦截 所以我全部放行 这样没有使用@PreAuthorize的的接口无需登录和权限即可访问
+        // 除上面外的所有请求全部需要鉴权认证
+//                .authenticated();
         // 禁用缓存
         httpSecurity.headers().cacheControl();
         // 添加JWT filter

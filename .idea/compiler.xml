@@ -12,6 +12,7 @@
         <module name="mall-api-system" />
         <module name="mall-system" />
         <module name="mall-gateway" />
+        <module name="mall-geteway" />
       </profile>
     </annotationProcessing>
   </component>
@@ -22,6 +23,7 @@
       <module name="mall-auth" options="-parameters" />
       <module name="mall-basis" options="-parameters" />
       <module name="mall-gateway" options="-parameters" />
+      <module name="mall-geteway" options="-parameters" />
       <module name="mall-system" options="-parameters" />
     </option>
   </component>

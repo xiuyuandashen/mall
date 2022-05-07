@@ -20,7 +20,7 @@ import java.io.IOException;
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.setContentType("application/json");
+        response.setContentType("application/json;Charset=UTF-8");
         response.getWriter().println(JSONUtil.parse(ResultVo.error().code(50014).message("token过期或未登录！")));
         response.getWriter().flush();
     }

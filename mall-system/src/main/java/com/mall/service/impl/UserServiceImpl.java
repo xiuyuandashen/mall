@@ -42,6 +42,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public int deleteUserByIds(Long[] userIds) {
         // 需要删除用户与角色的依赖
+        Arrays.stream(userIds).forEach(uid -> {
+            userRoleMapper.deleteUserRoleByUserId(uid);
+        });
         return baseMapper.deleteBatchIds(Arrays.asList(userIds));
     }
 

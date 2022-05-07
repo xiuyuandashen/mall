@@ -17,5 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mall/menu")
 public class MenuController {
 
+
+
 }
 

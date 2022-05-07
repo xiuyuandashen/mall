@@ -14,6 +14,22 @@
         <result property="updateTime" column="update_time"></result>
         <result property="remark" column="remark"></result>
     </resultMap>
+    <resultMap id="roleMap2" type="com.mall.domain.Role" >
+        <id property="roleId" column="role_id"></id>
+        <result property="roleName" column="role_name" ></result>
+        <result property="roleKey" column="role_key" ></result>
+        <result property="roleSort" column="role_sort" ></result>
+        <result property="status" column="status" ></result>
+        <result property="delFlag" column="del_flag" ></result>
+        <result property="createBy" column="create_by" ></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateBy" column="update_by"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="remark" column="remark"></result>
+        <collection property="menuIds"   javaType="java.util.List" ofType="long">
+            <result column="menu_id"></result>
+        </collection>
+    </resultMap>
     
     <sql id="selectRoleVo">
         select distinct r.*
@@ -21,9 +37,28 @@
         left join mall_user_role ur on ur.role_id = r.role_id
         left join mall_user u on u.user_id = ur.user_id
     </sql>
+
+    <sql id="selectRole2">
+        select  r.*,m.menu_id
+        from mall_role r
+        left join mall_role_menu rm on rm.role_id = r. role_id
+        left join mall_menu m on m.menu_id = rm.menu_id
+    </sql>
     
     <select id="selectRolesByUserId" resultType="com.mall.domain.Role" parameterType="long">
         <include refid="selectRoleVo"></include>
         where u.user_id = #{userId}  order by r.role_sort asc
+    </select>
+
+    <select id="checkRoleNameUnique" resultType="com.mall.domain.Role" parameterType="String">
+        select role_id,role_name from mall_role where role_name = #{roleName}
+    </select>
+    <select id="checkRoleKeyUnique" resultType="com.mall.domain.Role" parameterType="String">
+        select role_id,role_key from mall_role where role_key = #{roleKey}
+    </select>
+
+    <select id="findByRoleId" parameterType="long" resultMap="roleMap2">
+        <include refid="selectRole2"></include>
+        where r.role_id = #{roleId}
     </select>
 </mapper>
