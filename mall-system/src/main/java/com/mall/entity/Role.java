@@ -1,12 +1,16 @@
 package com.mall.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -27,16 +31,20 @@ public class Role implements Serializable {
      * 角色ID
      */
     @TableId(value = "role_id", type = IdType.AUTO)
+    @NotNull(message = "角色Id不能为空")
     private Long roleId;
 
     /**
      * 角色名称
      */
+    @NotNull
+    @Length(min = 2, message = "角色名称长度过短")
     private String roleName;
 
     /**
      * 角色权限字符串
      */
+    @NotNull(message = "角色权限标识符不能为空")
     private String roleKey;
 
     /**
@@ -52,6 +60,7 @@ public class Role implements Serializable {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
+    @TableLogic
     private String delFlag;
 
     /**
@@ -62,6 +71,7 @@ public class Role implements Serializable {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
@@ -72,6 +82,7 @@ public class Role implements Serializable {
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**
@@ -80,7 +91,8 @@ public class Role implements Serializable {
     private String remark;
 
     /** 菜单组 */
-    private Long[] menuIds;
-
+    // exist 是否为数据库表字段
+    @TableField(exist = false)
+    private List<Long> menuIds;
 
 }

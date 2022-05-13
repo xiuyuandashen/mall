@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author zlf
@@ -16,4 +16,18 @@ import java.util.List;
 public interface RoleService extends IService<Role> {
 
     List<com.mall.domain.Role> selectRolesByUserId(Long userId);
+
+    boolean checkRoleNameUnique(Role role);
+
+    boolean checkRoleKeyUnique(Role role);
+
+    void checkRoleAllowed(Role role);
+
+    int update(Role role);
+
+    int delete(Long roleId);
+
+    com.mall.domain.Role findByRoleId(Long roleId);
+
+    void assignPermission(Long roleId, Long[] menuIds);
 }

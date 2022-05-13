@@ -1,6 +1,5 @@
 package com.mall.config;
 
-
 import com.mall.components.JwtAuthenticationTokenFilter;
 import com.mall.components.MyUserDetailsService;
 import com.mall.components.RestAuthenticationEntryPoint;
@@ -26,13 +25,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @Description:
  */
 @EnableWebSecurity
-//  @EnableGlobalMethodSecurity 注解生效 @PreAuthorize
+// @EnableGlobalMethodSecurity 注解生效 @PreAuthorize
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Bean(name = "encoder")
-    public BCryptPasswordEncoder getEncoder(){
+    public BCryptPasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -46,7 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -64,27 +61,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js",
                         "/swagger-resources/**",
-                        "/v2/api-docs/**"
-                )
+                        "/v2/api-docs/**")
                 .permitAll()
                 .antMatchers(
 
                         "/mall/auth/login",
                         "/mall/system/user/info/**"
-//                        "/mall/user/**"
+                // "/mall/system/user/register"
+                // "/mall/user/**"
                 )// 对登录注册要允许匿名访问
                 .permitAll()
-                .antMatchers(HttpMethod.OPTIONS)//跨域请求会先进行一次options请求
+                .antMatchers(HttpMethod.OPTIONS)// 跨域请求会先进行一次options请求
                 .permitAll()
-//                .antMatchers("/**")//测试时全部运行访问
-//                .permitAll()
-                .anyRequest()// 除上面外的所有请求全部需要鉴权认证
-                .authenticated();
+                // .antMatchers("/**")//测试时全部运行访问
+                // .permitAll()
+                .anyRequest()
+                .permitAll();
+        // 不需要 authenticated 也行 因为 @PreAuthorize 可以拦截 所以我全部放行
+        // 这样没有使用@PreAuthorize的的接口无需登录和权限即可访问
+        // 除上面外的所有请求全部需要鉴权认证
+        // .authenticated();
         // 禁用缓存
         httpSecurity.headers().cacheControl();
         // 添加JWT filter
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        //添加自定义未授权和未登录结果返回
+        // 添加自定义未授权和未登录结果返回
         httpSecurity.exceptionHandling()
                 .accessDeniedHandler(restfulAccessDeniedHandler)
                 .authenticationEntryPoint(restAuthenticationEntryPoint);
@@ -96,11 +97,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 }
-

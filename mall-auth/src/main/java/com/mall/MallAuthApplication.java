@@ -9,8 +9,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class MallAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MallAuthApplication.class,args);
+        SpringApplication.run(MallAuthApplication.class, args);
     }
 }
-
-

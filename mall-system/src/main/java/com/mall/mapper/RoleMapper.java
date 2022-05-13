@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author zlf
@@ -18,4 +18,10 @@ import java.util.List;
 public interface RoleMapper extends BaseMapper<Role> {
 
     List<com.mall.domain.Role> selectRolesByUserId(Long userId);
+
+    com.mall.domain.Role checkRoleNameUnique(String roleName);
+
+    com.mall.domain.Role checkRoleKeyUnique(String roleKey);
+
+    com.mall.domain.Role findByRoleId(Long roleId);
 }
