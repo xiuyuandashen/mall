@@ -23,11 +23,11 @@
         <spring-boot.version>2.6.4</spring-boot.version>
     </properties>
     <modules>
-        <module>mall-system</module>
         <module>mall-basis</module>
         <module>mall-api</module>
         <module>mall-auth</module>
         <module>mall-gateway</module>
+        <module>mall-modules</module>
     </modules>
 
     <dependencyManagement>
