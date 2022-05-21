@@ -7,6 +7,13 @@
         delete from mall_role_menu where role_id = #{roleId}
     </delete>
 
+    <delete id="deleteRoleMenuByMenuIds" >
+        delete from mall_role_menu where menu_id in
+        <foreach collection="menuId" open="(" close=")" item="item" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
     <insert id="batchRoleMenu" parameterType="list">
         insert into mall_role_menu(role_id,menu_id) values
         <foreach collection="list" index="index" item="item" separator=",">

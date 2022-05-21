@@ -26,6 +26,7 @@
         <result property="updateBy" column="update_by"></result>
         <result property="updateTime" column="update_time"></result>
         <result property="remark" column="remark"></result>
+        <!--  需要指定ofType 即List的类型  -->
         <collection property="menuIds"   javaType="java.util.List" ofType="long">
             <result column="menu_id"></result>
         </collection>

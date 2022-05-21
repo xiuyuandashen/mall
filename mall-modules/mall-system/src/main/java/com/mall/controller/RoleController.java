@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
+
 
 /**
  * <p>
@@ -113,6 +113,5 @@ public class RoleController {
     public ResultVo assignPermission(@RequestParam("roleId") Long roleId, @RequestParam("menuIds") Long[] menuIds) {
         roleService.assignPermission(roleId, menuIds);
         return ResultVo.ok().message("分配成功");
-
     }
 }

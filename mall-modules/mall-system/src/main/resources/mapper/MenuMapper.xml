@@ -9,4 +9,20 @@
         left join mall_user_role ur on ur.role_id = rm.role_id
         where ur.user_id = #{userId}
     </select>
+    <select id="selectListByIds" parameterType="arraylist" resultType="com.mall.entity.Menu">
+        select *
+        from mall_menu
+        where menu_id in
+        <foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="updateStatusIds" >
+        update mall_menu set status = #{status} where
+        menu_id in
+        <foreach collection="ids" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

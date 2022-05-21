@@ -1,11 +1,9 @@
 package com.mall.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.List;
 
@@ -106,6 +104,7 @@ public class Menu implements Serializable {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
@@ -116,6 +115,7 @@ public class Menu implements Serializable {
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**
@@ -124,5 +124,6 @@ public class Menu implements Serializable {
     private String remark;
 
     /** 子菜单 */
+    @TableField(exist = false)
     private List<Menu> children = new ArrayList<Menu>();
 }

@@ -2,6 +2,7 @@ package com.mall.mapper;
 
 import com.mall.entity.Menu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return
      */
     List<String> selectPermsByUserId(Long userId);
+
+    List<Menu> selectListByIds(Long[] ids);
+
+    int updateStatusIds(@Param("ids") List<Long> ids,@Param("status") String status);
 }

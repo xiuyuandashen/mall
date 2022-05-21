@@ -17,4 +17,19 @@ public interface MenuService extends IService<Menu> {
 
 
     List<String> selectPermsByUserId(Long userId);
+
+    List<Menu> selectMenuByIds(Long[] menuIds);
+
+    /**
+     * 递归删除菜单
+     * @param menuId
+     */
+    void removeChildById(Long menuId);
+
+    /**
+     * 递归修改状态
+     * @param menuId
+     * @param status
+     */
+    void updateStatusChildById(Long menuId,String status);
 }

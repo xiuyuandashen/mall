@@ -19,5 +19,7 @@ public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
 
     int deleteRoleMenuByRoleId(Long roleId);
 
+    int deleteRoleMenuByMenuIds(List<Long> menuId);
+
     int batchRoleMenu(List<RoleMenu> list);
 }
