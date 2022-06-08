@@ -28,8 +28,6 @@ import reactor.core.publisher.Mono;
 @Configuration
 public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
     private static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Override

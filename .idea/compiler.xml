@@ -7,19 +7,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mall-common-redis" />
         <module name="mall-auth" />
         <module name="mall-api-system" />
-        <module name="mall-basis" />
+        <module name="mall-common-security" />
         <module name="mall-system" />
         <module name="mall-gateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mall-basis" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="mall-api-system" options="-parameters" />
       <module name="mall-auth" options="-parameters" />
       <module name="mall-basis" options="-parameters" />
+      <module name="mall-common" options="-parameters" />
+      <module name="mall-common-redis" options="-parameters" />
+      <module name="mall-common-security" options="-parameters" />
       <module name="mall-gateway" options="-parameters" />
       <module name="mall-modules" options="-parameters" />
       <module name="mall-system" options="-parameters" />

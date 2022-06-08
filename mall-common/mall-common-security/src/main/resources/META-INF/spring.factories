@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.mall2.components.JwtAuthenticationTokenFilter,\
+  com.mall2.components.MyUserDetailsService,\
+  com.mall2.components.RestAuthenticationEntryPoint,\
+  com.mall2.components.RestfulAccessDeniedHandler,\
+  com.mall2.config.SecurityConfig,\
+  com.mall2.utils.JwtTokenUtil

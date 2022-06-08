@@ -1,9 +1,9 @@
-package com.mall.config;
+package com.mall2.config;
 
-import com.mall.components.JwtAuthenticationTokenFilter;
-import com.mall.components.MyUserDetailsService;
-import com.mall.components.RestAuthenticationEntryPoint;
-import com.mall.components.RestfulAccessDeniedHandler;
+import com.mall2.components.JwtAuthenticationTokenFilter;
+import com.mall2.components.MyUserDetailsService;
+import com.mall2.components.RestAuthenticationEntryPoint;
+import com.mall2.components.RestfulAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -66,9 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
 
                         "/mall/auth/login",
-                        "/mall/system/user/info/**"
+                        "/mall/system/user/info/**",
                 // "/mall/system/user/register"
-                // "/mall/user/**"
+                 "/mall/system/user/test"
                 )// 对登录注册要允许匿名访问
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS)// 跨域请求会先进行一次options请求

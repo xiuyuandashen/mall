@@ -1,4 +1,4 @@
-package com.mall.components;
+package com.mall2.components;
 
 import cn.hutool.json.JSONUtil;
 import com.mall.base.ResultVo;

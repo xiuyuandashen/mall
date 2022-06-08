@@ -1,7 +1,7 @@
-package com.mall.components;
+package com.mall2.components;
 
 
-import com.mall.utils.JwtTokenUtil;
+import com.mall2.utils.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,9 +52,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
             String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
-            log.info("token: {}",authToken);
             String username = jwtTokenUtil.getUserNameFromToken(authToken);
-            log.info("checking username:{}", username);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if (jwtTokenUtil.validateToken(authToken, userDetails)) {

@@ -1,4 +1,4 @@
-package com.mall.components;
+package com.mall2.components;
 
 
 import com.alibaba.fastjson.JSON;

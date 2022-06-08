@@ -81,7 +81,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean checkEmailUnique(User sysUser) {
         User info = baseMapper.checkEmailUnique(sysUser.getEmail());
         Long id = sysUser.getUserId() == null ? -1L : sysUser.getUserId();
-        if (info != null && id.longValue() != id.longValue()) {
+        if (info != null && id.longValue() != info.getUserId().longValue()) {
             return false;
         }
         return true;

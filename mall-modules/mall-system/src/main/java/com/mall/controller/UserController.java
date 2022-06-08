@@ -1,23 +1,21 @@
 package com.mall.controller;
 
 import com.mall.base.ResultVo;
+import com.mall2.common.RedisService;
 import com.mall.domain.*;
 import com.mall.model.loginUser;
 import com.mall.service.MenuService;
 import com.mall.service.RoleService;
 import com.mall.service.UserService;
-import com.sun.tracing.dtrace.ProviderAttributes;
-import org.apache.catalina.Pipeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.nio.charset.Charset;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -38,6 +36,9 @@ public class UserController {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    RedisService redisService;
 
     @PostMapping("/register")
     public ResultVo register(@Valid @RequestBody User user) {
@@ -90,7 +91,15 @@ public class UserController {
      */
     @GetMapping("/info/{username}")
     public ResultVo userInfo(@PathVariable("username") String username) {
-        User user = userService.selectUserByUserName(username);
+        String key = "user:username:" + username;
+        User user = null;
+        if(redisService.hasKey(key)){
+            user = redisService.getCacheObject(key);
+        }else {
+            user = userService.selectUserByUserName(username);
+            redisService.setCacheObject(key,user);
+            redisService.expire(key,60, TimeUnit.SECONDS);
+        }
         loginUser resultUser = new loginUser();
         resultUser.setSysUser(user);
         List<String> perms = menuService.selectPermsByUserId(user.getUserId());
@@ -172,4 +181,8 @@ public class UserController {
         List<Role> roles = roleService.selectRolesByUserId(userId);
         return ResultVo.ok().data("roles", roles);
     }
+
+
+
+
 }

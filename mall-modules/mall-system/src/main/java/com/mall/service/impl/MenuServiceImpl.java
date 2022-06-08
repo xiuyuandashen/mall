@@ -6,6 +6,8 @@ import com.mall.mapper.MenuMapper;
 import com.mall.mapper.RoleMenuMapper;
 import com.mall.service.MenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mall2.common.RedisConfig;
+import com.mall2.common.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -30,10 +33,19 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Autowired
     private RoleMenuMapper roleMenuMapper;
+    @Autowired
+    private RedisService redisService;
 
     @Override
     public List<String> selectPermsByUserId(Long userId) {
-        return baseMapper.selectPermsByUserId(userId);
+        String key = "perms:userId:"+userId;
+        if(redisService.hasKey(key)){
+            return redisService.getCacheList(key);
+        }
+        List<String> perms = baseMapper.selectPermsByUserId(userId);
+        redisService.setCacheList(key,perms);
+        redisService.expire(key,60, TimeUnit.SECONDS);
+        return perms;
     }
 
     @Override

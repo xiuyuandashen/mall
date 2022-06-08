@@ -5,7 +5,7 @@ import com.mall.api.RemoteUserService;
 import com.mall.base.ResultVo;
 import com.mall.domain.User;
 import com.mall.model.loginUser;
-import com.mall.utils.JwtTokenUtil;
+import com.mall2.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;

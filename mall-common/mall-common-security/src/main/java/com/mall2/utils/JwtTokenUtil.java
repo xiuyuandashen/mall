@@ -1,4 +1,4 @@
-package com.mall.utils;
+package com.mall2.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
