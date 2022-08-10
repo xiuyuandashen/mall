@@ -10,6 +10,7 @@ import com.mall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.zlf.log.starter.annotation.Log;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -115,6 +116,7 @@ public class UserController {
      */
     @PreAuthorize("hasAnyAuthority('system','system:user:edit')")
     @PutMapping
+    @Log(module = "用户模块",description = "修改用户")
     public ResultVo edit(@RequestBody User sysUser, Principal principal) {
         // 判断是否为admin，admin不可修改
         userService.checkUserAllowed(sysUser);

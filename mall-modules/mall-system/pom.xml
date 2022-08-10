@@ -11,6 +11,13 @@
 
     <artifactId>mall-system</artifactId>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <dependency>
@@ -91,7 +98,18 @@
             <artifactId>mall-common-redis</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+<!--log日志工具-->
+<!--        <dependency>-->
+<!--            <groupId>org.example</groupId>-->
+<!--            <artifactId>mall-common-log</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
+<!--        将上面的log日志工具打包成springbootstarter进行引入-->
+        <dependency>
+            <groupId>com.github.xiuyuandashen</groupId>
+            <artifactId>log-spring-boot-starter</artifactId>
+            <version>v1.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
